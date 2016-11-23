@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    <style>
+        body,html,ul,ol,li,a,input{
+            margin:0;
+            padding: 0;
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            font-size: 14px;
+            color: black;
+        }
+        body{
+            background:url("img/aaa.jpg") repeat;
+        }
+        input{
+            width: 60%;
+        }
+        .cbox{
+            width:1000px;
+            height:550px;
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;right:0;top:0;bottom:0;
+            margin: auto;
+            background:url("img/bg.png") no-repeat;
+            background-size:100% 120%;
+            border-radius: 20px 20px 0 20px;
+        }
+        .top{
+            width:100%;
+            height:15%;
+            box-sizing: border-box;
+            border-bottom:3px double black;
+            float: left;
+            border-radius: 20px 20px 0 0 ;
+            padding: 0 260px;
+            text-align: center;
+        }
+        .top i{
+            display: block;
+            width: 50px;
+            height:100%;
+            line-height:1.3;
+            font-size: 60px;
+            float: left;
+            padding-left:20px;
+        }
+        .top a{
+            display: block;
+            padding: 10px 40px;
+            height:100%;
+            font-size:46px;
+            line-height:1.5;
+            font-family:"华康海报体W12(P)";
+            color:black;
+            float: left;
+        }
+        .left{
+            width:20%;
+            height:85%;
+            box-sizing: border-box;
+            border-right:3px double black;
+            float: left;
+            /*background: rgba(255,255,255,.2);*/
+            border-radius: 0 0 0 20px ;
+            overflow: hidden;
+        }
+        .left .login{
+            padding:10px 20px;
+        }
+        .left .login a{
+            font-size:26px;
+            font-family:"华康海报体W12(P)";
+        }
+        .left .menu{
+            padding-left: 20px;
+        }
+        .left .menu .menu_list{
+            margin: 5px 0;
+        }
+        .left .menu .menu_list a{
+            font-family:"Arial";
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .left .menu .menu_list i{
+            font-size: 18px;
+        }
+        .left .menu .menu_list .aside{
+            padding: 5px 0 0 28px;
+        }
+        .left .menu .menu_list .aside li{
+            font-family:"微软雅黑";
+            font-size: 14px;
+            cursor: pointer;
+            list-style: circle;
+            color: #000;
+            font-weight:bold;
+        }
+        .left .menu .menu_list .aside li:hover{
+            color: #FFF;
+        }
+        .canvas_box{
+            position: relative;
+            width:80%;
+            height:85%;
+            box-sizing: border-box;
+            float: left;
+        }
+        .canvas_box .copy{
+            position: absolute;
+            left:0;top:0;z-index:998;
+            width:100%;height:100%;
+            cursor: pointer;
+        }
+        canvas{
+            position: absolute;
+            left:0;top:0;;z-index:996;
+            /*background:rgba(255,255,255,0.4);*/
+            z-index:997;
+        }
+        .welcome{
+            position: absolute;
+            left:0;top:0;z-index:1;
+            width:100%;height:100%;
+        }
+        .welcome span{
+            display: block;
+            width:100%;
+            height:15%;
+            text-align: center;
+            font-size:40px;
+            font-family:fantasy;
+            position: absolute;
+            left:0;top:0;right:0;bottom:0;
+            margin: auto;
+        }
+        .newbox{
+            position: absolute;
+            left:0;top:0;right:0;bottom:0;
+            margin: auto;
+            width: 300px;
+            height:200px;
+            border-radius: 10px;
+            background: rgba(0,0,0,.8);
+            z-index:1000;
+        }
+        .newbox .ntitle{
+            width:100%;
+            height:25%;
+            border-bottom: 2px dotted rgba(255,255,255,.6);
+            font-family:"华康海报体W12(P)";
+            line-height: 2;
+            font-size: 28px;
+            text-align: center;
+            color: #FFFFCC;
+        }
+        .newbox .ncon{
+            width:100%;
+            height:75%;
+            padding:20px 5px;
+            box-sizing: border-box;
+            font-family: Arial;
+            font-size: 16px;
+            color:#FFFFCC;
+            text-align: center;
+        }
+        .newbox .ncon p{
+            font-family: Arial;
+            color:red;
+            font-size: 20px;
+            text-align: center;
+        }
+        .newbox .ncon span{
+            font-family: Arial;
+            color:red;
+            font-size: 16px;
+            padding: 0 4px;
+        }
+        .xp{
+            width:10px;
+            height:10px;
+            border:1px solid black;
+            position: absolute;
+            left: 0; right:0;
+            border:1px solid black;
+            z-index: 997;
+            background:#FFF;
+            cursor: pointer;
+            box-sizing: border-box;
+            display: none;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/shape.js"></script>
+    <script src="js/picture.js"></script>
+</head>
+<body>
+     <div class="cbox">
+         <div class="top">
+             <i class="iconfont icon-huaban"></i>
+             <a href="">LMD-CANVAS</a>
+         </div>
+         <div class="left">
+             <div class="login">
+                 <a href="#">画板工具</a>
+             </div>
+             <ul class="menu">
+                 <li class="menu_list">
+                     <i class="iconfont icon-caozuo"></i>
+                     <a href="#">文件操作</a>
+                     <ol class="aside">
+                         <li>新建文件</li>
+                         <li>撤销操作</li>
+                         <li>保存文件</li>
+                     </ol>
+                 </li>
+                 <li class="menu_list">
+                     <i class="iconfont icon-yangshixuanze"></i>
+                     <a href="#">画图样式</a>
+                     <ol class="aside">
+                         <li data-role="line">线</li>
+                         <li data-role="rect">矩形</li>
+                         <li data-role="arc">圆形</li>
+                         <li data-role="bian">多边形</li>
+                         <li data-role="jiao">多角形</li>
+                         <li data-role="pen">铅笔工具</li>
+                         <li data-role="null1">自定义边数:
+                             <input type="number" data-role="bianNum">
+                         </li>
+                         <li data-role="null2">自定义角数:
+                             <input type="number" data-role="jiaoNum">
+                         </li>
+                     </ol>
+                 </li>
+                 <li class="menu_list">
+                     <i class="iconfont icon-starfilled"></i>
+                     <a href="#">画图方式</a>
+                     <ol class="aside">
+                         <li data-role="stroke">描边</li>
+                         <li data-role="fill">填充</li>
+                     </ol>
+                 </li>
+                 <li class="menu_list">
+                     <i class="iconfont icon-bi"></i>
+                     <a href="#">线条宽度</a>
+                     <ol class="aside">
+                         <li data-role="1">细线</li>
+                         <li data-role="3">正常</li>
+                         <li data-role="5">粗线</li>
+                         <li data-role="null">粗度:
+                             <input type="number" >
+                         </li>
+                     </ol>
+                 </li>
+                 <li class="menu_list">
+                     <i class="iconfont icon-yanse"></i>
+                     <a href="#">颜色</a>
+                     <ol class="aside">
+                         <li>
+                             边框颜色: <input type="color" data-role="border">
+                         </li>
+                         <li>
+                             填充颜色: <input type="color" data-role="fill">
+                         </li>
+                     </ol>
+                 </li>
+                 <li class="menu_list">
+                     <i class="iconfont icon-xiangpi"></i>
+                     <a href="#">擦除</a>
+                     <ol class="aside">
+                         <li data-role="10">小橡皮</li>
+                         <li data-role="30">正常</li>
+                         <li data-role="50">大橡皮</li>
+                         <li data-role="null">num:
+                             <input type="number" data-role="xpsize">
+                         </li>
+                     </ol>
+                 </li>
+                 <li class="menu_list">
+                     <i class="iconfont icon-huaban"></i>
+                     <a href="#">图像处理</a>
+                     <ol class="aside">
+                         <li data-role="fx">反相</li>
+                         <li data-role="m">马赛克</li>
+                         <li data-role="blur">模糊</li>
+                         <input type="file">
+                         <img src="" alt="" hidden>
+                     </ol>
+                 </li>
+             </ul>
+         </div>
+         <div class="canvas_box">
+             <div class="welcome">
+                 <span>Welcome Come To My Canvas</span>
+             </div>
+             <canvas></canvas>
+             <div class="copy"></div>
+             <div class="newbox">
+                 <div class="ntitle">CANVAS友情提示</div>
+                 <div class="ncon">
+                     <p>当前画布没有内容,请绘制图形!</p>
+                     <span>5</span>s colse after!!
+                 </div>
+             </div>
+             <div class="xp"></div>
+         </div>
+     </div>
+     <script>
+         $(function(){
+             var canvasBox=document.querySelector(".canvas_box");
+             var canvasBoxW=canvasBox.offsetWidth;
+             var canvasBoxH=canvasBox.offsetHeight;
+             var canvas=document.querySelector("canvas");
+             var cobj=canvas.getContext("2d");
+             var copy=document.querySelector(".copy");
+             var xp=document.querySelector(".xp");
+             var wel=document.querySelector(".welcome");
+
+             canvas.width=canvasBoxW;
+             canvas.height=canvasBoxH;
+
+             $(copy).mouseover(function(){
+                 $(".welcome").fadeOut(400);
+                 $(canvas).fadeIn(600).css({"background":"rgba(255,255,255,0.4)"});
+             });
+             var drawObj=new shape(canvas,copy,cobj,xp);
+             drawObj.pen();
+             /**菜单栏操作**/
+             $(".aside").hide().eq(1).show();
+             $(".menu_list>a").click(function(){
+                 var index=$(".menu_list>a").index(this);
+                 $(".aside").slideUp().eq(index).stop(true,false).slideToggle();
+             });
+
+             /**画图样式**/
+             $(".menu_list:eq(1) .aside>li").click(function(){
+                 var fn=$(this).attr("data-role");
+                 if(fn!="pen"&&fn!="null1"&&fn!="null2"){
+                    drawObj.type=fn;
+                     drawObj.draw();
+                 }else if(fn="null1"){
+                     $(".menu_list:eq(1) .aside>li>input").change(function(){
+                         drawObj[$(this).attr("data-role")]=$(this).val();
+                     })
+                 }else if(fn="null2"){
+                     $(".menu_list:eq(1) .aside>li>input").change(function(){
+                         drawObj[$(this).attr("data-role")]=$(this).val();
+                     })
+                 }else{
+                     drawObj.pen();
+                 }
+             });
+             /**画图方式**/
+             $(".menu_list:eq(2) .aside>li").click(function(){
+                 var fn=$(this).attr("data-role");
+                 drawObj.style=fn;
+                 drawObj.draw();
+             });
+             /**线条宽度**/
+             $(".menu_list:eq(3) .aside>li").click(function(){
+                 var num=$(this).attr("data-role");
+                 if(num!=="null"){
+                     drawObj.linewidth=num;
+                     drawObj.draw();
+                 }else if(num=="null"){
+                     $(".menu_list:eq(3) .aside>li input").change(function(){
+                          var num=$(this).val();
+                         drawObj.linewidth=num;
+                         drawObj.draw();
+                     })
+                 }
+
+             });
+             /**颜色**/
+             $(".menu_list:eq(4) .aside input").change(function(){
+                 drawObj[$(this).attr("data-role")]=$(this).val();
+                 drawObj.draw();
+
+             });
+             /**橡皮**/
+             $(".menu_list:eq(5) .aside>li").click(function(){
+                 var index=$(".menu_list:eq(5) .aside>li").index(this);
+                 var num=$(this).attr("data-role");
+                 if(num!="null"){
+                     drawObj.xpsize=num;
+                     drawObj.clear();
+                 }else if(num="null"){
+                     $(".menu_list:eq(5) .aside>li input").change(function(){
+                         drawObj[$(this).attr("data-role")]=$(this).val();
+                         drawObj.clear();
+                     })
+                 }
+                 $(copy).mouseout(function(){$(xp).fadeOut()});
+
+             });
+
+             /**文件**/
+             $(".menu_list:eq(0) .aside>li").click(function(){
+                 var index=$(".menu_list:eq(0) .aside>li").index(this);
+                 if(index==0){
+                     if(drawObj.historys.length>0){
+                         var yes=confirm("当前画布是否保存");
+                         if(yes){
+                             var url=canvas.toDataURL();
+                             var newurl=url.replace("image/png","stream/octet");
+                             location.href=newurl;
+                         }
+                     }else if(drawObj.historys.length==0){
+                         news("当前画布没有内容,请绘制图形!");
+                     }
+                     cobj.clearRect(0,0,canvas.width,canvas.height);
+                     drawObj.historys=[];
+                 }else if(index==1){
+                     if(drawObj.historys.length==0){
+                         //no
+                         cobj.clearRect(0,0,canvas.width,canvas.height);
+                         setTimeout(function(){
+                             news("已经是最后一步了");
+                         },10)
+                     }else{
+                         if(drawObj.isback){
+                             if(drawObj.historys.length==1){
+                                 drawObj.historys.pop();
+                                 cobj.clearRect(0,0,canvas.width,canvas.height);
+                             }else{
+                                 drawObj.historys.pop();
+                                 cobj.putImageData(drawObj.historys.pop(),0,0);
+                             }
+                         }else{
+                             cobj.putImageData(drawObj.historys.pop(), 0, 0);
+                         }
+                         drawObj.isback = false;
+                     }
+
+                 }else if(index==2){
+                     if(drawObj.historys.length==0){
+                          news("当前画布没有图案，无法保存");
+                     }else{
+                         var url=canvas.toDataURL();
+                         var newurl=url.replace("image/png","stream/octet");
+                         location.href=newurl;
+                     }
+                 }
+
+             });
+
+
+             /*马赛克*/
+             function m(dataobj,num,x,y) {
+                 var width = dataobj.width, height = dataobj.height;
+                 var num = num;
+                 var w = width / num;
+                 var h = height / num;
+                 for (var i = 0; i < num; i++) {//行
+                     for (var j = 0; j < num; j++) {//列  x
+                         var dataObj = cobj.getImageData(j * w, i * h, w, h);
+
+                         var r = 0, g = 0, b = 0;
+                         for (var k = 0; k < dataObj.width * dataObj.height; k++) {
+                             r += dataObj.data[k * 4 + 0];
+                             g += dataObj.data[k * 4 + 1];
+                             b += dataObj.data[k * 4 + 2];
+                         }
+
+                         r = parseInt(r / (dataObj.width * dataObj.height));
+                         g = parseInt(g / (dataObj.width * dataObj.height));
+                         b = parseInt(b / (dataObj.width * dataObj.height));
+                         // console.log(r + "--" + g + "--" + b);
+
+                         for (var k = 0; k < dataObj.width * dataObj.height; k++) {
+                             dataObj.data[k * 4 + 0] = r;
+                             dataObj.data[k * 4 + 1] = g;
+                             dataObj.data[k * 4 + 2] = b;
+                         }
+
+
+                         cobj.putImageData(dataObj, x + j * w, y+i * h);
+
+                     }
+
+                 }
+
+             }
+
+             /*模糊*/
+             function blur(dataobj,num,x,y) {
+                 var width = dataobj.width, height = dataobj.height;
+                 var arr=[];
+                 var num = num;
+                 for (var i = 0; i < height; i++) {//行
+                     for (var j = 0; j < width; j++) {//列  x
+                         var x1=j+num>width?j-num:j;
+                         var y1=i+num>height?i-num:i;
+                         var dataObj = cobj.getImageData(x1, y1,num, num);
+
+                         var r = 0, g = 0, b = 0;
+                         for (var k = 0; k < dataObj.width * dataObj.height; k++) {
+                             r += dataObj.data[k * 4 + 0];
+                             g += dataObj.data[k * 4 + 1];
+                             b += dataObj.data[k * 4 + 2];
+                         }
+
+                         r = parseInt(r / (dataObj.width * dataObj.height));
+                         g = parseInt(g / (dataObj.width * dataObj.height));
+                         b = parseInt(b / (dataObj.width * dataObj.height));
+
+                         arr.push(r,g,b,255);
+
+                     }
+
+                 }
+
+                 for(var i=0;i<dataobj.data.length;i++){
+                     dataobj.data[i]=arr[i]
+                 }
+                 cobj.putImageData(dataobj,x,y);
+
+             }
+
+             /**反相**/
+             function fx(dataobj,x,y){
+                 for(var i=0;i<dataobj.width*dataobj.height;i++){
+                     dataobj.data[i*4+0]=255-dataobj.data[i*4+0];
+                     dataobj.data[i*4+1]=255-dataobj.data[i*4+1];
+                     dataobj.data[i*4+2]=255-dataobj.data[i*4+2];
+                     dataobj.data[i*4+3]=255
+
+                 }
+
+                 cobj.putImageData(dataobj,x,y);
+             }
+          /******图形处理*******/
+             var file=$(".menu_list:eq(6) .aside input")[0];
+             var img=$(".menu_list:eq(6) .aside img")[0];
+             file.onchange=function(){
+                 var fileObj=this.files[0];
+                 var reader=new FileReader();
+                 reader.readAsDataURL(fileObj);
+                 reader.onload=function(e){
+                     var that=this;
+                     img.src= e.target.result;
+                     cobj.drawImage(img,0,0,canvas.width,canvas.height);
+                    dataobj=cobj.getImageData(0,0,canvas.width,canvas.height);
+                 }
+             };
+
+             $(".menu_list:eq(6) .aside>li").click(function(){
+                   var index=$(".menu_list:eq(6) .aside>li").index(this);
+                   var num=$(this).attr("data-role");
+                   if(num=="blur"){
+                       blur(dataobj,5,0,0)
+                   }else if(num=="fx"){
+                     // alert(1);
+                       fx(dataobj,0,0)
+                   }else if(num=="m"){
+                       m(dataobj,50,0,0)
+                   }
+
+             });
+
+
+             /********消息提示**********/
+             $(".newbox").hide();
+             function news(info){
+                 $(".ncon p").html(info);
+                 $(".newbox").fadeIn(500);
+                 var num=5;
+                 setInterval(function(){
+                     num--;
+                     $(".ncon span").html(num);
+                     if(num==0){
+                         num=5;
+                         $(".newbox").fadeOut(1000);
+                     }
+                 },1000)
+             }
+
+         })
+
+     </script>
+</body>
+</html>
